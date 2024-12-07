@@ -5,11 +5,14 @@ FP run.py
 from mininet.net import Mininet
 from mininet.cli import CLI
 from mininet.term import makeTerm
-from minicps.mcps import MiniCPS
+#from minicps.mcps import MiniCPS
 from topo import FPTopo
 
 import time
+import sys
+sys.path.append('/usr/local/lib/python2.7/dist-packages')
 
+from minicps.mcps import MiniCPS
 
 class FPCPS(MiniCPS):
 
