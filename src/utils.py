@@ -13,6 +13,8 @@ abbr. LL: liquid level
       MV: motor valve
 """
 
+import sys
+sys.path.append('/usr/local/lib/python2.7/dist-packages')
 from minicps.utils import build_debug_logger
 
 fp_logger = build_debug_logger(
