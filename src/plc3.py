@@ -1,7 +1,8 @@
 """
 FP plc3.py
 """
-
+import sys
+sys.path.append('/usr/local/lib/python2.7/dist-packages')
 from minicps.devices import PLC
 from utils import PLC3_DATA, STATE
 from utils import PLC3_PROTOCOL, PLC3_ADDR
