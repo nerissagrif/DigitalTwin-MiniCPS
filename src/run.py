@@ -38,15 +38,15 @@ class FPCPS(MiniCPS):
 
         # to see the scripts running (xterm required),
         # uncomment the following lines (while removing the .cmd lines above)
-        # net.terms += makeTerm(s1, display=None, cmd='python physical_process.py')
-        # time.sleep(0.2)
-        # net.terms += makeTerm(s1, display=None, cmd='python physical_process_bottle.py')
-        # time.sleep(0.2)
-        # net.terms += makeTerm(plc3, display=None, cmd='python plc3.py')    # display=None
-        # time.sleep(0.2)
-        # net.terms += makeTerm(plc2, display=None, cmd='python plc2.py')
-        # time.sleep(0.2)
-        # net.terms += makeTerm(plc1, display=None, cmd='python plc1.py')
+        net.terms += makeTerm(s1, display=None, cmd='python physical_process.py')
+        time.sleep(0.2)
+        net.terms += makeTerm(s1, display=None, cmd='python physical_process_bottle.py')
+        time.sleep(0.2)
+        net.terms += makeTerm(plc3, display=None, cmd='python plc3.py')    # display=None
+        time.sleep(0.2)
+        net.terms += makeTerm(plc2, display=None, cmd='python plc2.py')
+        time.sleep(0.2)
+        net.terms += makeTerm(plc1, display=None, cmd='python plc1.py')
 
         CLI(self.net)
         # self.net.stop()
