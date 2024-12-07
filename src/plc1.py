@@ -12,13 +12,13 @@ import time
 import logging
 
 # tag addresses
-SENSOR1 = ('SENSOR1-LL-tank', 1)
-ACTUATOR1 = ('ACTUATOR1-MV', 1)
+SENSOR1 = ('SENSOR1-POWER', 1)
+ACTUATOR1 = ('ACTUATOR1', 1)
 # interlocks to plc2 and plc3
-SENSOR2_1 = ('SENSOR2-FL', 1)  # to be sent to PLC2
-SENSOR2_2 = ('SENSOR2-FL', 2)  # to be received from PLC2
-SENSOR3_1 = ('SENSOR3-LL-bottle', 1)  # to be sent to PLC3
-SENSOR3_3 = ('SENSOR3-LL-bottle', 3)  # to be received from PLC3
+SENSOR2_1 = ('SENSOR2-FORCE', 1)  # to be sent to PLC2
+SENSOR2_2 = ('SENSOR2-FORCE', 2)  # to be received from PLC2
+SENSOR3_1 = ('SENSOR3-SP-CENTRIFUGE', 1)  # to be sent to PLC3
+SENSOR3_3 = ('SENSOR3-SP-CENTRIFUGE', 3)  # to be received from PLC3
 
 
 class FPPLC1(PLC):
