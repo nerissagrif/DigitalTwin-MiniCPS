@@ -48,9 +48,9 @@ class FPPLC3(PLC):
                 # network capabilities
                 self.send(SENSOR3, liquidlevel_bottle, PLC3_ADDR)
                 # sensor3 = self.receive(SENSOR3, PLC3_ADDR)
-                print("DEBUG PLC3 - receive liquidlevel_bottle (SENSOR 3): ", liquidlevel_bottle
+                print("DEBUG PLC3 - receive liquidlevel_bottle (SENSOR 3): ", liquidlevel_bottle)
                 logging.info("Internal ENIP tag (SENSOR 3) updated: %.2f" % (
-                    liquidlevel_bottle)))
+                    liquidlevel_bottle))
             except:
                 logging.info("Could not update internal ENIP tag (SENSOR 3)")
 
