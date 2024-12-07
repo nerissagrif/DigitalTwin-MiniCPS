@@ -54,7 +54,7 @@ class LiquidTank(Tank):
 
             # update internal and state water level
             print("DEBUG phys-proc: new_wattage %.5f kW \t delta (volume): %.5f W" % (
-                new_level, (new_level + self.level) * self.section)
+                new_level, (new_level - self.level) * self.section)
             self.level = self.set(SENSOR1, new_level))
 
             if new_level <= TANK_M['LowerBound']:
