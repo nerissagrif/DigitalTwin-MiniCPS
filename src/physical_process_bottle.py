@@ -6,7 +6,8 @@ actuator1 is open and filled by the liquid running by sensor2 (flow level).
 
 - mere physical process (only get and set methods)
 """
-
+import sys
+sys.path.append('/usr/local/lib/python2.7/dist-packages')
 from minicps.devices import Tank
 
 from utils import STATE
