@@ -19,15 +19,15 @@ class FPHMI(HMI):
                     - monitor PLC1 tag (actuator1)
                 """
 
-        print 'DEBUG: FP HMI enters main_loop.'
-        print
+        print('DEBUG: FP HMI enters main_loop.')
+        #print
 
         while(True):
             # network capabilities
             self.send(ACTUATOR1_1, 1, PLC1_ADDR)  # open actuator
 
         time.sleep(HMI_PERIOD_SEC)
-        print 'DEBUG FP HMI shutdown'
+        print('DEBUG FP HMI shutdown')
 
 
 if __name__ == "__main__":
