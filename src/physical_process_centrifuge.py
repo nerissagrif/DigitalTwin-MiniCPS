@@ -54,12 +54,12 @@ class Bottle(Tank):
             self.level = self.set(SENSOR3, new_level)
 
             if new_level >= BOTTLE_M['UpperBound']:
-                print('DEBUG phys-proc: Centrifuge above speed threshold ', BOTTLE_M['UpperBound'])
+                print('DEBUG phys-proc: centrifuge reached speed threshold ', BOTTLE_M['UpperBound'])
                 # break
                 # simulates change of bottle
                 time.sleep(PP_PERIOD_SEC*10)  # simulate time to remove the bottle and hand in a empty one
                 self.level = self.set(SENSOR3, BOTTLE_INIT_LEVEL)
-                print('DEBUG phys-proc: Move sample to next stage')
+                print('DEBUG phys-proc: move sample to next stage')
 
             # count += 1
             time.sleep(PP_PERIOD_SEC)
