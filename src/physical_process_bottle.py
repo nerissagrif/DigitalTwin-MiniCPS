@@ -49,8 +49,8 @@ class Bottle(Tank):
 
             # update internal and state liquid level
             print("DEBUG phys-proc bottle: new_level  %.5f m \t delta (volume): %.5f m3" % (
-                new_level, (new_level - self.level) * self.section)
-            self.level = self.set(SENSOR3, new_level))
+                new_level, (new_level - self.level) * self.section))
+            self.level = self.set(SENSOR3, new_level)
 
             if new_level >= BOTTLE_M['UpperBound']:
                 print('DEBUG phys-proc: Bottle above upperbound threshold ', BOTTLE_M['UpperBound'])
