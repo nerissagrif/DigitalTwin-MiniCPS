@@ -12,7 +12,7 @@ import time
 import logging
 
 
-SENSOR3 = ('SENSOR3-LL-bottle', 3)
+SENSOR3 = ('SENSOR3-SP-CENTRIFUGE', 3)
 
 
 class FPPLC3(PLC):
