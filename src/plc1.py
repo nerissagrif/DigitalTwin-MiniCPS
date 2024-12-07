@@ -25,9 +25,9 @@ class FPPLC1(PLC):
     # boot process
     def pre_loop(self, sleep=0.1):
         print('DEBUG: FP PLC1 enters pre_loop')
-        print(
+        #print
 
-        time.sleep(sleep))
+        time.sleep(sleep)
 
     def main_loop(self):
         """plc1 main loop.
@@ -38,9 +38,9 @@ class FPPLC1(PLC):
                 """
 
         print('DEBUG: FP PLC1 enters main_loop.')
-        print(
+        #print
         # FYI: BSD-syslog format (RFC 3164), e.g. <133>Feb 25 14:09:07 webserver syslogd: restart   PRI <Facility*8+Severity>, HEADER (timestamp host), MSG (program/process message)
-        logging.basicConfig(filename='logs/plc1.log', format='%(levelname)s %(asctime)s '+PLC1_ADDR+' %(funcName)s %(message)s', datefmt='%m/%d/%Y %H:%M:%S', level=logging.DEBUG))
+        logging.basicConfig(filename='logs/plc1.log', format='%(levelname)s %(asctime)s '+PLC1_ADDR+' %(funcName)s %(message)s', datefmt='%m/%d/%Y %H:%M:%S', level=logging.DEBUG)
                                                 
         # count = 0
         # while (count <= PLC_SAMPLES):
