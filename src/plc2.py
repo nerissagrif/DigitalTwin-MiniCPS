@@ -12,7 +12,7 @@ import time
 import logging
 
 
-SENSOR2 = ('SENSOR2-FL', 2)
+SENSOR2 = ('SENSOR2-FORCE', 2)
 
 
 class FPPLC2(PLC):
