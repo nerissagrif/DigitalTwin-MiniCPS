@@ -28,14 +28,14 @@ class FPCPS(MiniCPS):
 
         # start devices
         plc1, plc2, plc3, s1, attacker = self.net.get('plc1', 'plc2', 'plc3', 's1', 'attacker')
-
+        
         s1.cmd('screen -dmSL power python physical_process.py')
         s1.cmd('screen -dmSL centrifuge python physical_process_centrifuge.py')
         plc3.cmd('screen -dmSL plc3 python plc3.py -Logfile')
         plc2.cmd('screen -dmSL plc2 python plc2.py -Logfile')
         plc1.cmd('screen -dmSL plc1 python plc1.py -Logfile')
         attacker.cmd('screen -dmSL attacker bash attack.sh')
-
+        '''
         # to see the scripts running (xterm required),
         # uncomment the following lines (while removing the .cmd lines above)
         net.terms += makeTerm(s1, display=None, cmd='python physical_process.py')
@@ -47,7 +47,7 @@ class FPCPS(MiniCPS):
         net.terms += makeTerm(plc2, display=None, cmd='python plc2.py')
         time.sleep(0.2)
         net.terms += makeTerm(plc1, display=None, cmd='python plc1.py')
-
+        '''
         CLI(self.net)
         # self.net.stop()
 
