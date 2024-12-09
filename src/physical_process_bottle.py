@@ -17,11 +17,6 @@ from utils import PP_PERIOD_SEC, PP_PERIOD_HOURS  # PP_SAMPLES
 
 import time
 
-ACTUATOR1 = ('ACTUATOR1', 1)
-SENSOR2 = ('SENSOR2-FORCE', 2)
-SENSOR3 = ('SENSOR3-SP-CENTRIFUGE', 3)
-
-
 class Bottle(Tank):
 
     # boot process
@@ -49,24 +44,24 @@ class Bottle(Tank):
             new_level = water_volume / self.section
 
             # update internal and state liquid level
-            print("DEBUG phys-proc centrifuge: new_speed %.5f \t delta (volume): %.5f" % (
-                new_level, (new_level - self.level) * self.section))
+            print "DEBUG phys-proc bottle: new_level  %.5f m \t delta (volume): %.5f m3" % (
+                new_level, (new_level - self.level) * self.section)
             self.level = self.set(SENSOR3, new_level)
 
             if new_level >= BOTTLE_M['UpperBound']:
-                print('DEBUG phys-proc: centrifuge reached speed threshold ', BOTTLE_M['UpperBound'])
+                print 'DEBUG phys-proc: Bottle above upperbound threshold ', BOTTLE_M['UpperBound']
                 # break
                 # simulates change of bottle
                 time.sleep(PP_PERIOD_SEC*10)  # simulate time to remove the bottle and hand in a empty one
                 self.level = self.set(SENSOR3, BOTTLE_INIT_LEVEL)
-                print('DEBUG phys-proc: move sample to next stage')
+                print 'DEBUG phys-proc: New bottle to fill'
 
             # count += 1
             time.sleep(PP_PERIOD_SEC)
 
     def _stop(self):
 
-        print("physical process stopped (centrifuge)")
+        print "physical process stopped (BOTTLE)"
 
 
 if __name__ == '__main__':
