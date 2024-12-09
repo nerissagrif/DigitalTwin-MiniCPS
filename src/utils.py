@@ -140,7 +140,7 @@ TANK_M = {  # liquid tank thresholds [m]
 }
 BOTTLE_M = {  # bottle thresholds [m]
     'LowerBound': 0.0,
-    'UpperBound': 0.9,
+    'UpperBound': 1.0,
 }
 
 
