@@ -49,7 +49,7 @@ class Bottle(Tank):
             new_level = water_volume / self.section
 
             # update internal and state liquid level
-            print("DEBUG phys-proc centrifuge: new_speed  %.5f m \t delta (volume): %.5f m3" % (
+            print("DEBUG phys-proc centrifuge: new_speed  %.5f rpm \t delta (volume): %.5f rpm" % (
                 new_level, (new_level - self.level) * self.section))
             self.level = self.set(SENSOR3, new_level)
 
