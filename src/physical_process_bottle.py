@@ -17,19 +17,17 @@ from utils import PP_PERIOD_SEC, PP_PERIOD_HOURS  # PP_SAMPLES
 
 import time
 
-SENSOR1 = ('SENSOR1-LL-tank', 1)
 ACTUATOR1 = ('ACTUATOR1-MV', 1)
 SENSOR2 = ('SENSOR2-FL', 2)
+SENSOR3 = ('SENSOR3-LL-bottle', 3)
 
 
-class LiquidTank(Tank):
+class Bottle(Tank):
 
     # boot process
     def pre_loop(self):
-        # simulates closed valve
-        self.set(ACTUATOR1, 0)
-        # simulates init level of liquid tank
-        self.level = self.set(SENSOR1, TANK_INIT_LEVEL)
+        # simulates init level of bottle
+        self.level = self.set(SENSOR3, BOTTLE_INIT_LEVEL)
 
     def main_loop(self):
         # count = 0
@@ -40,46 +38,43 @@ class LiquidTank(Tank):
             # compute water volume
             water_volume = self.section * new_level
 
-            # outflow volumes
+            # inflow volumes
             actuator = self.get(ACTUATOR1)
             if int(actuator) == 1:
-                self.set(SENSOR2, PUMP_FLOWRATE_OUT)             
-                outflow = PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
-                # print "DEBUG phys-proc: Tank outflow  ", outflow
-                water_volume -= outflow
-            elif int(actuator) == 0:
-                self.set(SENSOR2, 0.00)  # no outflow
+                sensor2 = self.get(SENSOR2)
+                inflow = float(sensor2) * PP_PERIOD_HOURS
+                water_volume += inflow
 
             # compute new water_level
             new_level = water_volume / self.section
 
-            # update internal and state water level
-            print "DEBUG phys-proc: new_level  %.5f m \t delta (volume): %.5f m3" % (
+            # update internal and state liquid level
+            print "DEBUG phys-proc bottle: new_level  %.5f m \t delta (volume): %.5f m3" % (
                 new_level, (new_level - self.level) * self.section)
-            self.level = self.set(SENSOR1, new_level)
+            self.level = self.set(SENSOR3, new_level)
 
-            if new_level <= TANK_M['LowerBound']:
-                print 'DEBUG phys-proc: Tank below lowerbound threshold ', TANK_M['LowerBound']
+            if new_level >= BOTTLE_M['UpperBound']:
+                print 'DEBUG phys-proc: Bottle above upperbound threshold ', BOTTLE_M['UpperBound']
                 # break
-                # simulates refill of tank
-                time.sleep(PP_PERIOD_SEC*10)    # simulate time to refill the tank
-                self.level = self.set(SENSOR1, TANK_INIT_LEVEL)
-                print 'DEBUG phys-proc: Tank has been refilled'
+                # simulates change of bottle
+                time.sleep(PP_PERIOD_SEC*10)  # simulate time to remove the bottle and hand in a empty one
+                self.level = self.set(SENSOR3, BOTTLE_INIT_LEVEL)
+                print 'DEBUG phys-proc: New bottle to fill'
 
             # count += 1
             time.sleep(PP_PERIOD_SEC)
 
     def _stop(self):
 
-        print "physical process stopped (TANK)"
+        print "physical process stopped (BOTTLE)"
 
 
 if __name__ == '__main__':
 
-    rwt = LiquidTank(
-        name='tank',
+    rwt = Bottle(
+        name='bottle',
         state=STATE,
         protocol=None,
-        section=TANK_SECTION,
-        level=TANK_INIT_LEVEL
+        section=BOTTLE_SECTION,
+        level=BOTTLE_INIT_LEVEL
     )
