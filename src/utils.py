@@ -17,8 +17,6 @@ import sys
 sys.path.append('/usr/local/lib/python2.7/dist-packages')
 from minicps.utils import build_debug_logger
 
-from minicps.utils import build_debug_logger
-
 fp_logger = build_debug_logger(
     name=__name__,
     bytes_per_file=10000,
