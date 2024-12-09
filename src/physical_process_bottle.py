@@ -49,12 +49,12 @@ class Bottle(Tank):
             new_level = water_volume / self.section
 
             # update internal and state liquid level
-            print("DEBUG phys-proc bottle: new_level  %.5f m \t delta (volume): %.5f m3" % (
+            print("DEBUG phys-proc centrifuge: new_speed  %.5f m \t delta (volume): %.5f m3" % (
                 new_level, (new_level - self.level) * self.section))
             self.level = self.set(SENSOR3, new_level)
 
             if new_level >= BOTTLE_M['UpperBound']:
-                print('DEBUG phys-proc: Bottle above upperbound threshold ', BOTTLE_M['UpperBound'])
+                print('DEBUG phys-proc: centrifuge speed above upperbound threshold ', BOTTLE_M['UpperBound'])
                 # break
                 # simulates change of bottle
                 time.sleep(PP_PERIOD_SEC*10)  # simulate time to remove the bottle and hand in a empty one
@@ -66,7 +66,7 @@ class Bottle(Tank):
 
     def _stop(self):
 
-        print("physical process stopped (BOTTLE)")
+        print("physical process stopped (centrifuge)")
 
 
 if __name__ == '__main__':
