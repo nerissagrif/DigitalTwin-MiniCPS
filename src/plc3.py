@@ -42,13 +42,13 @@ class FPPLC3(PLC):
         while True:
             # physical process
             liquidlevel_bottle = float(self.get(SENSOR3))
-            print("PLC3 - get liquidlevel_bottle (SENSOR 3): %i" % liquidlevel_bottle)
+            print("PLC3 - get speed_centrifuge (SENSOR 3): %i" % liquidlevel_bottle)
 
             try:
                 # network capabilities
                 self.send(SENSOR3, liquidlevel_bottle, PLC3_ADDR)
                 # sensor3 = self.receive(SENSOR3, PLC3_ADDR)
-                print("DEBUG PLC3 - receive liquidlevel_bottle (SENSOR 3): ", liquidlevel_bottle)
+                print("DEBUG PLC3 - receive speed_centrifuge (SENSOR 3): ", liquidlevel_bottle)
                 logging.info("Internal ENIP tag (SENSOR 3) updated: %.2f" % (
                     liquidlevel_bottle))
             except:
