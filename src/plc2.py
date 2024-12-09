@@ -12,17 +12,17 @@ import time
 import logging
 
 
-SENSOR2 = ('SENSOR2-FORCE', 2)
+SENSOR2 = ('SENSOR2-FL', 2)
 
 
 class FPPLC2(PLC):
 
     # boot process
     def pre_loop(self, sleep=0.6):
-        print('DEBUG: FP PLC2 booting process (enter pre_loop)')
-        print(
+        print 'DEBUG: FP PLC2 booting process (enter pre_loop)'
+        print
         # wait for the other plcs
-        time.sleep(sleep))
+        time.sleep(sleep)
 
     def main_loop(self, sleep=0.0):
         """plc2 main loop.
@@ -30,8 +30,8 @@ class FPPLC2(PLC):
                     - update internal enip server
                 """
 
-        print('DEBUG: FP PLC2 enters main_loop.')
-        #print
+        print 'DEBUG: FP PLC2 enters main_loop.'
+        print
         # FYI: BSD-syslog format (RFC 3164), e.g. <133>Feb 25 14:09:07 webserver syslogd: restart   PRI <Facility*8+Severity>, HEADER (timestamp host), MSG (program/process message)
         logging.basicConfig(filename='logs/plc2.log',
                             format='%(levelname)s %(asctime)s ' + PLC2_ADDR + ' %(funcName)s %(message)s',
@@ -48,7 +48,7 @@ class FPPLC2(PLC):
             try:
                 self.send(SENSOR2, flowlevel, PLC2_ADDR)
                 # sensor2 = self.receive(SENSOR2, PLC2_ADDR)
-                print("DEBUG PLC2 - receive flowlevel (SENSOR 2): ", flowlevel)
+                print "DEBUG PLC2 - receive flowlevel (SENSOR 2): ", flowlevel
                 logging.info("Internal ENIP tag (SENSOR 2) updated: %.2f" % (
                     flowlevel))
             except:
@@ -57,7 +57,7 @@ class FPPLC2(PLC):
             time.sleep(PLC_PERIOD_SEC)
             # count += 1
 
-        print('DEBUG FP PLC2 shutdown')
+        print 'DEBUG FP PLC2 shutdown'
 
 
 if __name__ == "__main__":
