@@ -47,13 +47,13 @@ class FPPLC1(PLC):
         while True:
             # get sensor1 value
             liquidlevel_tank = float(self.get(SENSOR1))   # physical process simulation (sensor 1 reads value)
-            print('DEBUG PLC1 - liquid level of tank (SENSOR 1): %.5f' % liquidlevel_tank)
+            print('DEBUG PLC1 - wattage of power supply (SENSOR 1): %.5f' % liquidlevel_tank)
             self.send(SENSOR1, liquidlevel_tank, PLC1_ADDR) # network process simulation (value of sensor 1 is stored as enip tag)
 
             if liquidlevel_tank <= TANK_M['LowerBound']:
-                print("INFO PLC1 - liquid level of tank (SENSOR 1) under LowerBound: %.2f <= %.2f -> close mv (ACTUATOR 1)." % (
+                print("INFO PLC1 - wattage (SENSOR 1) under LowerBound: %.2f <= %.2f -> close mv (ACTUATOR 1)." % (
                     liquidlevel_tank, TANK_M['LowerBound']))
-                logging.info("Liquid level of tank (SENSOR 1) under LowerBound: %.2f <= %.2f -> close mv (ACTUATOR 1)." % (
+                logging.info("wattage (SENSOR 1) under LowerBound: %.2f <= %.2f -> close mv (ACTUATOR 1)." % (
                     liquidlevel_tank, TANK_M['LowerBound']))
                 self.set(ACTUATOR1, 0)   # CLOSE actuator mv
                 self.send(ACTUATOR1, 0, PLC1_ADDR)
@@ -61,46 +61,46 @@ class FPPLC1(PLC):
             # read from PLC2
             try:
                 flowlevel = float(self.receive(SENSOR2_2, PLC2_ADDR))
-                print("DEBUG PLC1 - receive flowlevel (SENSOR 2): %f" % flowlevel)
+                print("DEBUG PLC1 - receive voltage (SENSOR 2): %f" % flowlevel)
                 self.send(SENSOR2_1, flowlevel, PLC1_ADDR)
 
                 if flowlevel >= SENSOR2_THRESH:
-                    print("INFO PLC1 - Flow level (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> close mv (ACTUATOR 1)." % (
+                    print("INFO PLC1 - voltage (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> close mv (ACTUATOR 1)." % (
                         flowlevel, SENSOR2_THRESH))
-                    logging.info("Flow level (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> close mv (ACTUATOR 1)." % (
+                    logging.info("voltage (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> close mv (ACTUATOR 1)." % (
                         flowlevel, SENSOR2_THRESH))
                     self.set(ACTUATOR1, 0)     # CLOSE actuator mv
                     self.send(ACTUATOR1, 0, PLC1_ADDR)
                 else:
                     logging.info(
-                        "Flow level (SENSOR 2) under SENSOR2_THRESH:  %.2f < %.2f -> leave mv status (ACTUATOR 1)." % (
+                        "voltage (SENSOR 2) under SENSOR2_THRESH:  %.2f < %.2f -> leave mv status (ACTUATOR 1)." % (
                             flowlevel, SENSOR2_THRESH))
             except:
-                logging.warning("Flow level (SENSOR 2) is not received. Program is unable to proceed properly")
+                logging.warning("voltage (SENSOR 2) is not received. Program is unable to proceed properly")
 
             # read from PLC3
             try:
                 liquidlevel_bottle = float(self.receive(SENSOR3_3, PLC3_ADDR))
-                print("DEBUG PLC1 - receive liquid level of bottle (SENSOR 3): %f" % liquidlevel_bottle)
+                print("DEBUG PLC1 - receive speed of centrifuge (SENSOR 3): %f" % liquidlevel_bottle)
                 self.send(SENSOR3_1, liquidlevel_bottle, PLC1_ADDR)
 
                 if liquidlevel_bottle >= BOTTLE_M['UpperBound']:
-                    print("INFO PLC1 - Liquid level (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> close mv (ACTUATOR 1)." %(
+                    print("INFO PLC1 - centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> close mv (ACTUATOR 1)." %(
                         liquidlevel_bottle,BOTTLE_M['UpperBound']))
-                    logging.info("Liquid level (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> close mv (ACTUATOR 1)." %(
+                    logging.info("centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> close mv (ACTUATOR 1)." %(
                         liquidlevel_bottle,BOTTLE_M['UpperBound']))
                     self.set(ACTUATOR1, 0)     # CLOSE actuator mv
                     self.send(ACTUATOR1, 0, PLC1_ADDR)
 
                 elif liquidlevel_bottle < BOTTLE_M['UpperBound'] and liquidlevel_tank > TANK_M['LowerBound']:
-                    print("INFO PLC1 - Liquid level (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f ->  open mv (ACTUATOR 1)." %(
+                    print("INFO PLC1 - centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f ->  open mv (ACTUATOR 1)." %(
                         liquidlevel_bottle, BOTTLE_M['UpperBound']))
-                    logging.info("Liquid level (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f -> open mv (ACTUATOR 1)." %(
+                    logging.info("centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f -> open mv (ACTUATOR 1)." %(
                         liquidlevel_bottle, BOTTLE_M['UpperBound']))
                     self.set(ACTUATOR1, 1)  # OPEN actuator mv
                     self.send(ACTUATOR1, 1, PLC1_ADDR)
             except:
-                logging.warning("Liquid level (SENSOR 3) is not received. Program is unable to proceed properly")
+                logging.warning("centrifuge speed (SENSOR 3) is not received. Program is unable to proceed properly")
 
             time.sleep(PLC_PERIOD_SEC)
             # count += 1
