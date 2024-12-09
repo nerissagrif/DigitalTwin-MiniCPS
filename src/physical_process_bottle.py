@@ -59,7 +59,7 @@ class Bottle(Tank):
                 # simulates change of bottle
                 time.sleep(PP_PERIOD_SEC*10)  # simulate time to remove the bottle and hand in a empty one
                 self.level = self.set(SENSOR3, BOTTLE_INIT_LEVEL)
-                print('DEBUG phys-proc: New bottle to fill')
+                print('DEBUG phys-proc: move sample to next stage')
 
             # count += 1
             time.sleep(PP_PERIOD_SEC)
