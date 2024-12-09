@@ -19,8 +19,8 @@ class FPPLC3(PLC):
 
     # boot process
     def pre_loop(self, sleep=0.6):
-        print 'DEBUG: FP PLC3 booting process (enter pre_loop)'
-        print
+        print('DEBUG: FP PLC3 booting process (enter pre_loop)')
+        #print
         # wait for the other plcs
         time.sleep(sleep)
 
@@ -30,8 +30,8 @@ class FPPLC3(PLC):
                     - update internal enip server
                 """
 
-        print 'DEBUG: FP PLC3 enters main_loop.'
-        print
+        print('DEBUG: FP PLC3 enters main_loop.')
+        #print
         # FYI: BSD-syslog format (RFC 3164), e.g. <133>Feb 25 14:09:07 webserver syslogd: restart   PRI <Facility*8+Severity>, HEADER (timestamp host), MSG (program/process message)
         logging.basicConfig(filename='logs/plc3.log',
                             format='%(levelname)s %(asctime)s ' + PLC3_ADDR + ' %(funcName)s %(message)s',
@@ -42,13 +42,13 @@ class FPPLC3(PLC):
         while True:
             # physical process
             liquidlevel_bottle = float(self.get(SENSOR3))
-            print "PLC3 - get liquidlevel_bottle (SENSOR 3): %i" % liquidlevel_bottle
+            print("PLC3 - get liquidlevel_bottle (SENSOR 3): %i" % liquidlevel_bottle)
 
             try:
                 # network capabilities
                 self.send(SENSOR3, liquidlevel_bottle, PLC3_ADDR)
                 # sensor3 = self.receive(SENSOR3, PLC3_ADDR)
-                print "DEBUG PLC3 - receive liquidlevel_bottle (SENSOR 3): ", liquidlevel_bottle
+                print("DEBUG PLC3 - receive liquidlevel_bottle (SENSOR 3): ", liquidlevel_bottle)
                 logging.info("Internal ENIP tag (SENSOR 3) updated: %.2f" % (
                     liquidlevel_bottle))
             except:
@@ -57,7 +57,7 @@ class FPPLC3(PLC):
             time.sleep(PLC_PERIOD_SEC)
             # count += 1
 
-        print 'DEBUG FP PLC3 shutdown'
+        print('DEBUG FP PLC3 shutdown')
 
 
 if __name__ == "__main__":
