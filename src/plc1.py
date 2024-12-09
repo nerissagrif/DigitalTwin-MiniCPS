@@ -51,9 +51,9 @@ class FPPLC1(PLC):
             self.send(SENSOR1, liquidlevel_tank, PLC1_ADDR) # network process simulation (value of sensor 1 is stored as enip tag)
 
             if liquidlevel_tank <= TANK_M['LowerBound']:
-                print("INFO PLC1 - wattage (SENSOR 1) under LowerBound: %.2f <= %.2f -> close mv (ACTUATOR 1)." % (
+                print("INFO PLC1 - wattage (SENSOR 1) under LowerBound: %.2f <= %.2f -> power removed (ACTUATOR 1)." % (
                     liquidlevel_tank, TANK_M['LowerBound']))
-                logging.info("wattage (SENSOR 1) under LowerBound: %.2f <= %.2f -> close mv (ACTUATOR 1)." % (
+                logging.info("wattage (SENSOR 1) under LowerBound: %.2f <= %.2f -> power removed (ACTUATOR 1)." % (
                     liquidlevel_tank, TANK_M['LowerBound']))
                 self.set(ACTUATOR1, 0)   # CLOSE actuator mv
                 self.send(ACTUATOR1, 0, PLC1_ADDR)
@@ -65,15 +65,15 @@ class FPPLC1(PLC):
                 self.send(SENSOR2_1, flowlevel, PLC1_ADDR)
 
                 if flowlevel >= SENSOR2_THRESH:
-                    print("INFO PLC1 - voltage (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> close mv (ACTUATOR 1)." % (
+                    print("INFO PLC1 - voltage (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> power removed (ACTUATOR 1)." % (
                         flowlevel, SENSOR2_THRESH))
-                    logging.info("voltage (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> close mv (ACTUATOR 1)." % (
+                    logging.info("voltage (SENSOR 2) over SENSOR2_THRESH:  %.2f >= %.2f -> power removed (ACTUATOR 1)." % (
                         flowlevel, SENSOR2_THRESH))
                     self.set(ACTUATOR1, 0)     # CLOSE actuator mv
                     self.send(ACTUATOR1, 0, PLC1_ADDR)
                 else:
                     logging.info(
-                        "voltage (SENSOR 2) under SENSOR2_THRESH:  %.2f < %.2f -> leave mv status (ACTUATOR 1)." % (
+                        "voltage (SENSOR 2) under SENSOR2_THRESH:  %.2f < %.2f -> leave power status (ACTUATOR 1)." % (
                             flowlevel, SENSOR2_THRESH))
             except:
                 logging.warning("voltage (SENSOR 2) is not received. Program is unable to proceed properly")
@@ -85,17 +85,17 @@ class FPPLC1(PLC):
                 self.send(SENSOR3_1, liquidlevel_bottle, PLC1_ADDR)
 
                 if liquidlevel_bottle >= BOTTLE_M['UpperBound']:
-                    print("INFO PLC1 - centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> close mv (ACTUATOR 1)." %(
+                    print("INFO PLC1 - centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> power removed (ACTUATOR 1)." %(
                         liquidlevel_bottle,BOTTLE_M['UpperBound']))
-                    logging.info("centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> close mv (ACTUATOR 1)." %(
+                    logging.info("centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> power removed (ACTUATOR 1)." %(
                         liquidlevel_bottle,BOTTLE_M['UpperBound']))
                     self.set(ACTUATOR1, 0)     # CLOSE actuator mv
                     self.send(ACTUATOR1, 0, PLC1_ADDR)
 
                 elif liquidlevel_bottle < BOTTLE_M['UpperBound'] and liquidlevel_tank > TANK_M['LowerBound']:
-                    print("INFO PLC1 - centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f ->  open mv (ACTUATOR 1)." %(
+                    print("INFO PLC1 - centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f ->  power restored (ACTUATOR 1)." %(
                         liquidlevel_bottle, BOTTLE_M['UpperBound']))
-                    logging.info("centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f -> open mv (ACTUATOR 1)." %(
+                    logging.info("centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f -> power restored (ACTUATOR 1)." %(
                         liquidlevel_bottle, BOTTLE_M['UpperBound']))
                     self.set(ACTUATOR1, 1)  # OPEN actuator mv
                     self.send(ACTUATOR1, 1, PLC1_ADDR)
