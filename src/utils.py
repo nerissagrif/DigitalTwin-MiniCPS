@@ -17,6 +17,8 @@ import sys
 sys.path.append('/usr/local/lib/python2.7/dist-packages')
 from minicps.utils import build_debug_logger
 
+from minicps.utils import build_debug_logger
+
 fp_logger = build_debug_logger(
     name=__name__,
     bytes_per_file=10000,
@@ -27,28 +29,28 @@ fp_logger = build_debug_logger(
 
 # data
 PLC1_DATA = {
-    'SENSOR1-POWER': '30',
-    'ACTUATOR1': '0',  # 0 means CLOSE and 1 means OPEN
-    'SENSOR2-FORCE': '0.0',  # interlock with PLC2
-    'SENSOR3-SP-CENTRIFUGE': '0.0'  # interlock with PLC3
+    'SENSOR1-LL-tank': '1.7',
+    'ACTUATOR1-MV': '0',  # 0 means CLOSE and 1 means OPEN
+    'SENSOR2-FL': '0.0',  # interlock with PLC2
+    'SENSOR3-LL-bottle': '0.0'  # interlock with PLC3
 }
 PLC2_DATA = {
-    'SENSOR2-FORCE': '0'  # interlock with PLC1
+    'SENSOR2-FL': '0'  # interlock with PLC1
 }
 PLC3_DATA = {
-    'SENSOR3-SP-CENTRIFUGE': '0'  # interlock with PLC1
+    'SENSOR3-LL-bottle': '0'  # interlock with PLC1
 }
 HMI_DATA = {
-    'ACTUATOR1': '0'  # interlock with PLC1
+    'ACTUATOR1-MV': '0'  # interlock with PLC1
 }
 
 # PLC1
 PLC1_MAC = '00:00:00:00:00:01'
 PLC1_TAGS = (
-    ('SENSOR1-POWER', 1, 'REAL'),
-    ('ACTUATOR1', 1, 'INT'),  # 0 means CLOSE and 1 means OPEN
-    ('SENSOR2-FORCE', 1, 'REAL'),  # interlock with PLC2
-    ('SENSOR3-SP-CENTRIFUGE', 1, 'REAL')  # interlock with PLC3
+    ('SENSOR1-LL-tank', 1, 'REAL'),
+    ('ACTUATOR1-MV', 1, 'INT'),  # 0 means CLOSE and 1 means OPEN
+    ('SENSOR2-FL', 1, 'REAL'),  # interlock with PLC2
+    ('SENSOR3-LL-bottle', 1, 'REAL')  # interlock with PLC3
 )
 PLC1_ADDR = '10.0.0.1'
 PLC1_SERVER = {
@@ -64,7 +66,7 @@ PLC1_PROTOCOL = {
 # PLC2
 PLC2_MAC = '00:00:00:00:00:02'
 PLC2_ADDR = '10.0.0.2'
-PLC2_TAGS = (('SENSOR2-FORCE', 2, 'REAL'),)
+PLC2_TAGS = (('SENSOR2-FL', 2, 'REAL'),)
 PLC2_SERVER = {
     'address': PLC2_ADDR,
     'tags': PLC2_TAGS
@@ -78,7 +80,7 @@ PLC2_PROTOCOL = {
 # PLC3
 PLC3_MAC = '00:00:00:00:00:03'
 PLC3_ADDR = '10.0.0.3'
-PLC3_TAGS = (('SENSOR3-SP-CENTRIFUGE', 3, 'REAL'),)
+PLC3_TAGS = (('SENSOR3-LL-bottle', 3, 'REAL'),)
 PLC3_SERVER = {
     'address': PLC3_ADDR,
     'tags': PLC3_TAGS
@@ -92,7 +94,7 @@ PLC3_PROTOCOL = {
 # HMI
 HMI_MAC = '00:00:00:00:00:04'
 HMI_ADDR = '10.0.0.4'
-HMI_TAGS = (('ACTUATOR1', 4, 'INT'),)  # HMI-pid: 4
+HMI_TAGS = (('ACTUATOR1-MV', 4, 'INT'),)  # HMI-pid: 4
 HMI_SERVER = {
     'address': HMI_ADDR,
     'tags': HMI_TAGS
@@ -123,10 +125,10 @@ PP_PERIOD_HOURS = (PP_PERIOD_SEC / 3600.0) * PP_RESCALING_HOURS
 HMI_PERIOD_SEC = 1
 
 # physical conditions
-TANK_SECTION = 26      # m2
-TANK_INIT_LEVEL = 100  # l   #1.80
+TANK_SECTION = 1.50      # m2
+TANK_INIT_LEVEL = 5.80  # l   #1.80
 
-PUMP_FLOWRATE_OUT = 230  # m3/h
+PUMP_FLOWRATE_OUT = 2.45  # m3/h
 
 BOTTLE_SECTION = 0.75      # m2
 BOTTLE_INIT_LEVEL = 0.0   # l
@@ -135,12 +137,12 @@ BOTTLE_INIT_LEVEL = 0.0   # l
 SENSOR2_THRESH = 3.00   # m3/h upperbound
 
 TANK_M = {  # liquid tank thresholds [m]
-    'LowerBound': 0,
-    'UpperBound': 300,       #1.81
+    'LowerBound': 0.3,
+    'UpperBound': 5.81,       #1.81
 }
 BOTTLE_M = {  # bottle thresholds [m]
     'LowerBound': 0.0,
-    'UpperBound': 1.0,
+    'UpperBound': 0.9,
 }
 
 
