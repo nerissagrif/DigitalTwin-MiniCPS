@@ -16,9 +16,9 @@ from utils import PP_PERIOD_SEC, PP_PERIOD_HOURS  # PP_SAMPLES
 
 import time
 
-SENSOR1 = ('SENSOR1-POWER', 1)
-ACTUATOR1 = ('ACTUATOR1', 1)
-SENSOR2 = ('SENSOR2-FORCE', 2)
+SENSOR1 = ('SENSOR1-LL-tank', 1)
+ACTUATOR1 = ('ACTUATOR1-MV', 1)
+SENSOR2 = ('SENSOR2-FL', 2)
 
 
 class LiquidTank(Tank):
@@ -53,24 +53,24 @@ class LiquidTank(Tank):
             new_level = water_volume / self.section
 
             # update internal and state water level
-            print("DEBUG phys-proc: new_wattage %.5f W \t delta (volume): %.5f W" % (
+            print "DEBUG phys-proc: new_level  %.5f m \t delta (volume): %.5f m3" % (
                 new_level, (new_level - self.level) * self.section)
-            self.level = self.set(SENSOR1, new_level))
+            self.level = self.set(SENSOR1, new_level)
 
             if new_level <= TANK_M['LowerBound']:
-                print('DEBUG phys-proc: wattage below lowerbound threshold ', TANK_M['LowerBound'])
+                print 'DEBUG phys-proc: Tank below lowerbound threshold ', TANK_M['LowerBound']
                 # break
                 # simulates refill of tank
                 time.sleep(PP_PERIOD_SEC*10)    # simulate time to refill the tank
                 self.level = self.set(SENSOR1, TANK_INIT_LEVEL)
-                print('DEBUG phys-proc: power supply has been restored')
+                print 'DEBUG phys-proc: Tank has been refilled'
 
             # count += 1
             time.sleep(PP_PERIOD_SEC)
 
     def _stop(self):
 
-        print("physical process stopped (POWER)")
+        print "physical process stopped (TANK)"
 
 
 if __name__ == '__main__':
