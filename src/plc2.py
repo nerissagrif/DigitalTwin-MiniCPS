@@ -48,7 +48,7 @@ class FPPLC2(PLC):
             try:
                 self.send(SENSOR2, flowlevel, PLC2_ADDR)
                 # sensor2 = self.receive(SENSOR2, PLC2_ADDR)
-                print("DEBUG PLC2 - receive voltage (SENSOR 2): ", flowlevel)
+                print("DEBUG PLC2 - receive voltage (SENSOR 2): %.2f V" %  (flowlevel))
                 logging.info("Internal ENIP tag (SENSOR 2) updated: %.2f" % (
                     flowlevel))
             except:
