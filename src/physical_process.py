@@ -45,7 +45,7 @@ class LiquidTank(Tank):
                 self.set(SENSOR2, PUMP_FLOWRATE_OUT)             
                 outflow = PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
                 # print "DEBUG phys-proc: Tank outflow  ", outflow
-                water_volume -= outflow
+                water_volume += outflow
             elif int(actuator) == 0:
                 self.set(SENSOR2, 0.00)  # no outflow
 
