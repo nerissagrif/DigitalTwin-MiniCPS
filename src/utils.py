@@ -124,7 +124,7 @@ HMI_PERIOD_SEC = 1
 
 # physical conditions
 TANK_SECTION = 1.50      # m2
-TANK_INIT_LEVEL = 5.80  # l   #1.80
+TANK_INIT_LEVEL = 150  # l   #1.80
 
 PUMP_FLOWRATE_OUT = 2.45  # m3/h
 
