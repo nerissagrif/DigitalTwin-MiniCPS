@@ -48,7 +48,8 @@ class LiquidTank(Tank):
                 water_volume += outflow
             elif int(actuator) == 0:
                 self.set(SENSOR2, 0.00)  # no outflow
-
+                water_volume += outflow
+                
             # compute new water_level
             new_level = water_volume / self.section
 
