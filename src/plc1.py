@@ -85,17 +85,17 @@ class FPPLC1(PLC):
                 self.send(SENSOR3_1, liquidlevel_bottle, PLC1_ADDR)
 
                 if liquidlevel_bottle >= BOTTLE_M['UpperBound']:
-                    print("INFO PLC1 - centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> power removed (ACTUATOR 1)." %(
+                    print("INFO PLC1 - centrifuge speed (SENSOR 3) over UpperBound:  %.2f >= %.2f -> power removed (ACTUATOR 1)." %(
                         liquidlevel_bottle,BOTTLE_M['UpperBound']))
-                    logging.info("centrifuge speed (SENSOR 3) over BOTTLE_M['UpperBound']:  %.2f >= %.2f -> power removed (ACTUATOR 1)." %(
+                    logging.info("centrifuge speed (SENSOR 3) over UpperBound:  %.2f >= %.2f -> power removed (ACTUATOR 1)." %(
                         liquidlevel_bottle,BOTTLE_M['UpperBound']))
                     self.set(ACTUATOR1, 0)     # CLOSE actuator mv
                     self.send(ACTUATOR1, 0, PLC1_ADDR)
 
                 elif liquidlevel_bottle < BOTTLE_M['UpperBound'] and liquidlevel_tank > TANK_M['LowerBound']:
-                    print("INFO PLC1 - centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f ->  power restored (ACTUATOR 1)." %(
+                    print("INFO PLC1 - centrifuge speed (SENSOR 3) under UpperBound: %.2f < %.2f ->  power restored (ACTUATOR 1)." %(
                         liquidlevel_bottle, BOTTLE_M['UpperBound']))
-                    logging.info("centrifuge speed (SENSOR 3) under BOTTLE_M['UpperBound']: %.2f < %.2f -> power restored (ACTUATOR 1)." %(
+                    logging.info("centrifuge speed (SENSOR 3) under UpperBound: %.2f < %.2f -> power restored (ACTUATOR 1)." %(
                         liquidlevel_bottle, BOTTLE_M['UpperBound']))
                     self.set(ACTUATOR1, 1)  # OPEN actuator mv
                     self.send(ACTUATOR1, 1, PLC1_ADDR)
