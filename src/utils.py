@@ -124,7 +124,7 @@ HMI_PERIOD_SEC = 1
 
 # physical conditions
 TANK_SECTION = 1.50      # m2
-TANK_INIT_LEVEL = 150  # l   #1.80
+TANK_INIT_LEVEL = 200  # l   #1.80
 
 PUMP_FLOWRATE_OUT = 2.45  # m3/h
 
@@ -135,8 +135,8 @@ BOTTLE_INIT_LEVEL = 0.0   # l
 SENSOR2_THRESH = 3.00   # m3/h upperbound
 
 TANK_M = {  # liquid tank thresholds [m]
-    'LowerBound': 0.3,
-    'UpperBound': 5.81,       #1.81
+    'LowerBound': 0.0,
+    'UpperBound': 300,       #1.81
 }
 BOTTLE_M = {  # bottle thresholds [m]
     'LowerBound': 0.0,
