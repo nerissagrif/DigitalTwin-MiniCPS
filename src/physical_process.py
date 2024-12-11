@@ -49,7 +49,7 @@ class LiquidTank(Tank):
             elif int(actuator) == 0:
                 self.set(SENSOR2, 0.00)  # no outflow
                 outflow = PUMP_FLOWRATE_OUT * PP_PERIOD_HOURS
-                water_volume += outflow
+                water_volume -= outflow
                 
             # compute new water_level
             new_level = water_volume / self.section
